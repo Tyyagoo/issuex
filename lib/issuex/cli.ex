@@ -30,10 +30,17 @@ defmodule Issuex.CLI do
 
   def process({user, project, _count}) do
     Issuex.Github.Issues.fetch(user, project)
-    |> IO.inspect()
+    |> handle_github_response()
   end
 
   defp parse_args([user, project, count]), do: {user, project, String.to_integer(count)}
   defp parse_args([user, project]), do: {user, project, @default_count}
   defp parse_args(_), do: :help
+
+  defp handle_github_response({:ok, body}), do: body
+
+  defp handle_github_response({:error, err}) do
+    IO.inspect(err, label: "Error fetching from Github")
+    System.halt(2)
+  end
 end

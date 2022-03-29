@@ -15,11 +15,11 @@ defmodule Issuex.Github.Issues do
   @spec handle_response({:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}) ::
           {:ok | :error, HTTPoison.body()} | {:error, any}
   defp handle_response({:ok, %{status_code: 200, body: body}}) do
-    {:ok, body}
+    {:ok, Jason.decode!(body)}
   end
 
-  defp handle_response({:ok, %{status_code: _, body: body}}) do
-    {:error, body}
+  defp handle_response({:ok, %{body: body}}) do
+    {:error, Jason.decode!(body)}
   end
 
   defp handle_response({:error, %{reason: reason}}) do
