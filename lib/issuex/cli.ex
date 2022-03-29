@@ -28,8 +28,9 @@ defmodule Issuex.CLI do
     System.halt(0)
   end
 
-  def process({user, project, count}) do
-    nil
+  def process({user, project, _count}) do
+    Issuex.Github.Issues.fetch(user, project)
+    |> IO.inspect()
   end
 
   defp parse_args([user, project, count]), do: {user, project, String.to_integer(count)}
