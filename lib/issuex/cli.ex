@@ -28,9 +28,12 @@ defmodule Issuex.CLI do
     System.halt(0)
   end
 
-  def process({user, project, _count}) do
+  def process({user, project, count}) do
     Issuex.Github.Issues.fetch(user, project)
     |> handle_github_response()
+    |> Enum.sort_by(&Map.get(&1, "number"))
+    |> Enum.take(count)
+    |> Issuex.Table.render(%{user: user, project: project})
   end
 
   defp parse_args([user, project, count]), do: {user, project, String.to_integer(count)}
