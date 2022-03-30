@@ -10,6 +10,13 @@ defmodule Issuex.MixProject do
       name: "Issuex",
       source_url: "https://github.com/Tyyagoo/issuex",
       deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ],
       escript: escript_config()
     ]
   end
@@ -26,7 +33,8 @@ defmodule Issuex.MixProject do
       {:jason, "~> 1.3"},
       {:table_rex, "~> 3.1"},
       {:ex_doc, "~> 0.28.3"},
-      {:earmark, "~> 1.4"}
+      {:earmark, "~> 1.4"},
+      {:excoveralls, "~> 0.14.4", only: :test}
     ]
   end
 
