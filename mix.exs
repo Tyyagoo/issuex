@@ -20,7 +20,8 @@ defmodule Issuex.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.8"},
-      {:jason, "~> 1.3"}
+      {:jason, "~> 1.3"},
+      {:table_rex, "~> 3.1"}
     ]
   end
 end
