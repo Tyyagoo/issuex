@@ -7,7 +7,7 @@ defmodule Issuex.CLI do
 
   @default_count 4
 
-  def run(args) do
+  def main(args) do
     args
     |> parse()
     |> process()
